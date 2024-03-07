@@ -20,9 +20,9 @@ const AddPhoto = () => {
     setImage(newFile);
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(image);
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    console.log(image)
     const body = {
       title: imageTitle,
       document: image,
@@ -30,26 +30,25 @@ const AddPhoto = () => {
     }
 
     console.log('HELLO', body)
-
-    axios.post(`http://127.0.0.1:8000/octopus/${id}/photo/`, body, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-        // "Authorization": `Bearer ${localStorage.getItem("access_token")}`,
-      },
-    }
-    )
-      .then((res) => {
-        console.log(res.data);
+    try {
+      await axios.post(`${process.env.REACT_APP_BACKEND_URL}/octopus/${id}/photo/`, body, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          // "Authorization": `Bearer ${localStorage.getItem("access_token")}`,
+        }
       })
-      .catch((err) => console.log(err));
-  };
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
   return (
     <div className="App">
       <form onSubmit={handleSubmit}>
         <p>
           <input
             type="text"
-            placeholder="Title"
+            placeholder="Image Title"
             id="title"
             value={imageTitle}
             onChange={handleChange}
@@ -65,7 +64,7 @@ const AddPhoto = () => {
             required
           />
         </p>
-        <input type="submit" />
+        <button type="submit" className="btn btn-secondary">Add Photo</button>
       </form>
     </div>
   );

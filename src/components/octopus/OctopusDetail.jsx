@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react"
 import axios from 'axios'
 import { useParams, Link } from "react-router-dom"
+import AddPhoto from "./AddPhoto"
+import AddSighting from "./AddSighting"
 
 
 export default function OctopusDetail() {
@@ -26,21 +28,25 @@ export default function OctopusDetail() {
 
 
   return (
-    <div>
+    <div className="h-dvh">
       <Link className="mt-5 ml-5 btn btn-accent btn-target:shadow-lg" to={'/octopus'}>Go Back</Link>
-      <div className="flex justify-center items-center h-dvh">
+      <button className="btn btn-warning">Edit</button>
+      <button className="btn btn-error">Delete</button>
+      <div className="flex justify-center items-center h-4/6 ">
         {data &&
-          <div className="card card-compact bg-neutral shadow-xl p-4">
-            <div className="card-body">
-              <h2 className="card-title">
-                {data.name} <span className="text-sm">({data.scientific_name})</span>
-              </h2>
-              <p>{data.description}</p>
-              <p>Maximum life span: {data.life_span} years.</p>
+          <div className="bg-neutral flex flex-col md:flex-row gap-4 justify-center items-start">
+            <div className="card p-4 md:w-1/2">
+              <div className="card-body">
+                <h2 className="card-title">
+                  {data.name} <span className="text-sm">({data.scientific_name})</span>
+                </h2>
+                <p>{data.description}</p>
+                <p>Maximum life span: {data.life_span} years.</p>
+              </div>
+              <AddPhoto />
             </div>
+            <AddSighting />
             <div className="card-footer card-actions justify-end">
-              <button className="btn btn-warning">Edit</button>
-              <button className="btn btn-error">Delete</button>
             </div>
           </div>
         }
