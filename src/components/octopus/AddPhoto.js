@@ -26,12 +26,12 @@ const AddPhoto = () => {
     const body = {
       title: imageTitle,
       document: image,
-      octopus_id: id
+      octopus: id
     }
 
     console.log('HELLO', body)
 
-    axios.post(`http://127.0.0.1:8000/photo/`, body, {
+    axios.post(`http://127.0.0.1:8000/octopus/${id}/photo/`, body, {
       headers: {
         "Content-Type": "multipart/form-data",
         // "Authorization": `Bearer ${localStorage.getItem("access_token")}`,
