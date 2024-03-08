@@ -9,6 +9,7 @@ import Loading from "../common/Loading"
 export default function OctopusDetail() {
 
   const [data, setData] = useState(null)
+  const [photoAdded, setPhotoAdded] = useState(false)
   const { id } = useParams()
 
   const isLoading = !data
@@ -20,13 +21,14 @@ export default function OctopusDetail() {
         const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/octopus/${id}`)
         console.log(response.data)
         setData(response.data)
+        setPhotoAdded(false)
       } catch (e) {
         console.log(e)
       }
     }
 
     fetchData()
-  }, [id])
+  }, [id, photoAdded])
 
 
 
@@ -50,7 +52,7 @@ export default function OctopusDetail() {
                   <p><strong>Bio:</strong> {data.description}</p>
                   <p><strong>Maximum life span:</strong> {data.life_span} years.</p>
                 </div>
-                <AddPhoto />
+                <AddPhoto octopusData={data} setPhotoAdded={setPhotoAdded} />
               </div>
               <div className="card p-4 md:w-1/2">
                 <AddSighting />

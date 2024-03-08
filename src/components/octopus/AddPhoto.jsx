@@ -3,7 +3,7 @@ import axios from "axios";
 import { v4 as uuidv4 } from 'uuid';
 import { useParams } from "react-router-dom";
 
-const AddPhoto = () => {
+const AddPhoto = ({ octopusData, setPhotoAdded }) => {
   const [imageTitle, setImageTitle] = useState('')
   const [image, setImage] = useState(null)
   const { id } = useParams()
@@ -29,7 +29,6 @@ const AddPhoto = () => {
       octopus: id
     }
 
-    console.log('HELLO', body)
     try {
       await axios.post(`${process.env.REACT_APP_BACKEND_URL}/octopus/${id}/photo/`, body, {
         headers: {
@@ -37,6 +36,8 @@ const AddPhoto = () => {
           // "Authorization": `Bearer ${localStorage.getItem("access_token")}`,
         }
       })
+      setImageTitle('')
+      setPhotoAdded(true)
     } catch (err) {
       console.log(err)
     }
@@ -44,6 +45,14 @@ const AddPhoto = () => {
 
   return (
     <div className="card card-body md:w-1/2 space-y-4">
+      {octopusData.photos && (
+        octopusData.photos.map((photo, idx) => (
+          <div key={idx}>
+            <img src={photo.document} alt={photo.title} />
+            <p>{photo.title}</p>
+          </div>
+        ))
+      )}
       <form onSubmit={handleSubmit} className="flex flex-col space-y-4 w-full max-w-xs">
         <input
           type="text"
