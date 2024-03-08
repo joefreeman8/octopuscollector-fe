@@ -43,27 +43,25 @@ const AddPhoto = () => {
   }
 
   return (
-    <div className="App">
-      <form onSubmit={handleSubmit}>
-        <p>
-          <input
-            type="text"
-            placeholder="Image Title"
-            id="title"
-            value={imageTitle}
-            onChange={handleChange}
-            required
-          />
-        </p>
-        <p>
-          <input
-            type="file"
-            id="image"
-            accept="image/png, image/jpeg"
-            onChange={handleImageChange}
-            required
-          />
-        </p>
+    <div className="card card-body md:w-1/2 space-y-4">
+      <form onSubmit={handleSubmit} className="flex flex-col space-y-4 w-full max-w-xs">
+        <input
+          type="text"
+          placeholder="Image Title"
+          id="title"
+          value={imageTitle}
+          onChange={handleChange}
+          required
+          className="py-2"
+        />
+        <input
+          type="file"
+          id="image"
+          accept="image/png, image/jpeg"
+          onChange={handleImageChange}
+          required
+          className="w-full file:ml-6 file:mr-8 file:py-2 file:rounded-full file:border-solid file:px-5 file:font-semibold file:bg-orange-200 file:text-black hover:file:bg-orange-300"
+        />
         <button type="submit" className="btn btn-secondary">Add Photo</button>
       </form>
     </div>

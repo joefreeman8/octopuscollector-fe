@@ -14,7 +14,7 @@ import AddSighting from './components/octopus/AddSighting';
 function App() {
 
   return (
-    <div data-theme="aqua">
+    <div data-theme="aqua" className='h-dvh'>
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
