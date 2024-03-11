@@ -44,37 +44,43 @@ const AddPhoto = ({ octopusData, setPhotoAdded }) => {
   }
 
   return (
-    <div className="card card-body md:w-1/2 space-y-4">
-      {octopusData.photos && (
-        octopusData.photos.map((photo, idx) => (
-          <div key={idx}>
-            <img src={photo.document} alt={photo.title} />
-            <p>{photo.title}</p>
-          </div>
-        ))
-      )}
-      <form onSubmit={handleSubmit} className="flex flex-col space-y-4 w-full max-w-xs">
-        <input
-          type="text"
-          placeholder="Image Title"
-          id="title"
-          value={imageTitle}
-          onChange={handleChange}
-          required
-          className="py-2"
-        />
-        <input
-          type="file"
-          id="image"
-          accept="image/png, image/jpeg"
-          onChange={handleImageChange}
-          required
-          className="w-full file:ml-6 file:mr-8 file:py-2 file:rounded-full file:border-solid file:px-5 file:font-semibold file:bg-orange-200 file:text-black hover:file:bg-orange-300"
-        />
-        <button type="submit" className="btn btn-secondary">Add Photo</button>
-      </form>
-    </div>
-  );
-};
+    <>
+      <div className="mt-5 sm:grid sm:grid-cols-2 sm:gap-3">
+        {octopusData.photos && (
+          octopusData.photos.map((photo, idx) => (
+            <div key={idx} className="card card-compact bg-base-300 shadow-xl">
+              <figure><img src={photo.document} alt={photo.title} /></figure>
+              <div className="card-body text-center flex items-center">
+                <p className="card-title text-sm">{photo.title}</p>
+              </div>
+            </div>
+          ))
+        )}
+      </div>
+      <div>
+        <form onSubmit={handleSubmit} className="flex flex-col space-y-4 w-full max-w-xs">
+          <input
+            type="text"
+            placeholder="Image Title"
+            id="title"
+            value={imageTitle}
+            onChange={handleChange}
+            required
+            className="py-2"
+          />
+          <input
+            type="file"
+            id="image"
+            accept="image/png, image/jpeg"
+            onChange={handleImageChange}
+            required
+            className="w-full file:ml-6 file:mr-8 file:py-2 file:rounded-full file:border-solid file:px-5 file:font-semibold file:bg-orange-200 file:text-black hover:file:bg-orange-300"
+          />
+          <button type="submit" className="btn btn-secondary">Add Photo</button>
+        </form>
+      </div>
+    </>
+  )
+}
 
 export default AddPhoto

@@ -2,7 +2,7 @@ import { useState } from "react"
 import { useParams } from 'react-router-dom'
 import axios from "axios"
 
-export default function AddSighting() {
+export default function AddSighting({ octopusData, setSightingAdded }) {
 
   const { id } = useParams()
 
@@ -38,8 +38,8 @@ export default function AddSighting() {
   async function handleSubmit(e) {
     e.preventDefault()
     try {
-      const res = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/octopus/${id}/sightings/`, formData)
-      console.log('successful post -> ', res)
+      await axios.post(`${process.env.REACT_APP_BACKEND_URL}/octopus/${id}/sightings/`, formData)
+      setSightingAdded(true)
     } catch (err) {
       console.log(err)
     }
@@ -47,21 +47,50 @@ export default function AddSighting() {
   }
 
   return (
-    <div className="card card-body md:w-1/2 space-y-4" >
-      <h1 className="text-lg font-bold">Recent Sighting</h1>
-      <form onSubmit={handleSubmit} className="form-control space-y-4">
+    <div className="card card-body space-y-4" >
+      <h1 className="text-lg font-bold">Recent Sightings</h1>
+      <div>
+        {octopusData.sightings_this_week ? (
+          <div className="card card-normal bg-primary-content p-4">The {octopusData.name} has been spotted this week!</div>
+        ) : octopusData.sightings_this_month ? (
+          <div className="card card-normal bg-warning text-black p-4">The {octopusData.name} has been sighted within the last 28 days!</div>
+        ) : (
+          <div className="card card-normal bg-red-600 p-4">The {octopusData.name} has not been spotted for a while!</div>
+        )
+        }
+      </div>
+      <div className="overflow-x-auto">
+        <table className="table table-zebra">
+          <thead className="text-sm">
+            <tr>
+              <th>Date</th>
+              <th>Location</th>
+            </tr>
+          </thead>
+          <tbody>
+            {octopusData.sightings.map((sighting, idx) => (
+              <tr key={idx}>
+                <td>{sighting.date}</td>
+                <td>{sighting.location_display}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <h2 className="text-lg font-bold">Add Sighting</h2>
+      <form onSubmit={handleSubmit} className="flex items-center content-center w-full form-control space-y-4">
         <input
           name="date"
           type="date"
           value={formData.date}
           onChange={handleChange}
-          className="input input-bordered w-full max-w-xs"
+          className="input input-bordered w-full"
         />
         <select
           name="location"
           id="location"
           onChange={handleChange}
-          className="select select-bordered w-full max-w-xs"
+          className="select select-bordered w-full"
         >
           <option value=""></option>
           {SEAS_OPTIONS.map(sea => (
@@ -71,7 +100,7 @@ export default function AddSighting() {
           ))}
         </select>
         <button
-          className="btn btn-secondary w-full max-w-xs"
+          className="btn btn-secondary w-full"
           type="submit"
         >
           Add Sighting

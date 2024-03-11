@@ -33,8 +33,6 @@ export default function OctopusIndex() {
                   <h2 className="card-title">
                     {octopus.name} <span className="text-sm">({octopus.scientific_name})</span>
                   </h2>
-                  {/* <p>{octopus.description}</p> */}
-                  {/* <p>Maximum life span: {octopus.life_span} years.</p> */}
                 </div>
               </div>
             </Link>

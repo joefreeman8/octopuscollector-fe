@@ -10,6 +10,7 @@ export default function OctopusDetail() {
 
   const [data, setData] = useState(null)
   const [photoAdded, setPhotoAdded] = useState(false)
+  const [sightingAdded, setSightingAdded] = useState(false)
   const { id } = useParams()
 
   const isLoading = !data
@@ -22,13 +23,14 @@ export default function OctopusDetail() {
         console.log(response.data)
         setData(response.data)
         setPhotoAdded(false)
+        setSightingAdded(false)
       } catch (e) {
         console.log(e)
       }
     }
 
     fetchData()
-  }, [id, photoAdded])
+  }, [id, photoAdded, sightingAdded])
 
 
 
@@ -43,8 +45,8 @@ export default function OctopusDetail() {
             <button className="btn btn-error">Delete</button>
           </div>
           <div className="flex justify-center items-center">
-            <div className="text-center bg-neutral shadow-xl rounded-lg flex flex-col md:flex-row gap-4 justify-center md:items-start">
-              <div className="card p-4 md:w-1/2">
+            <div className="text-center flex flex-col md:flex-row gap-4 justify-center md:items-start">
+              <div className="card p-4 sm:w-1/2">
                 <div className="card-body flex items-center">
                   <h1 className="card-title text-center">
                     {data.name} <span className="text-sm">({data.scientific_name})</span>
@@ -52,10 +54,11 @@ export default function OctopusDetail() {
                   <p><strong>Bio:</strong> {data.description}</p>
                   <p><strong>Maximum life span:</strong> {data.life_span} years.</p>
                 </div>
+                <hr />
                 <AddPhoto octopusData={data} setPhotoAdded={setPhotoAdded} />
               </div>
-              <div className="card p-4 md:w-1/2">
-                <AddSighting />
+              <div className="card p-4 sm:w-1/2">
+                <AddSighting octopusData={data} setSightingAdded={setSightingAdded} />
               </div>
               <div className="card-footer card-actions justify-end">
               </div>
