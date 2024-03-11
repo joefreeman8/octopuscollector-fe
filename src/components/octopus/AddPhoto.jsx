@@ -6,6 +6,7 @@ import { useParams } from "react-router-dom";
 const AddPhoto = ({ octopusData, setPhotoAdded }) => {
   const [imageTitle, setImageTitle] = useState('')
   const [image, setImage] = useState(null)
+  const [currentImageIndex, setCurrentImageIndex] = useState(0)
   const { id } = useParams()
 
   const handleChange = (e) => {
@@ -43,30 +44,55 @@ const AddPhoto = ({ octopusData, setPhotoAdded }) => {
     }
   }
 
+  const goToPreviousImage = () => {
+    setCurrentImageIndex((prevIndex) => (prevIndex > 0 ? prevIndex - 1 : octopusData.photos.length - 1))
+  }
+
+  const goToNextImage = () => {
+    setCurrentImageIndex((prevIndex) => (prevIndex + 1) % octopusData.photos.length)
+  }
+
   return (
     <>
       <div className="mt-5 sm:grid sm:grid-cols-2 sm:gap-3">
-        {octopusData.photos && (
-          octopusData.photos.map((photo, idx) => (
-            <div key={idx} className="card card-compact bg-base-300 shadow-xl">
-              <figure><img src={photo.document} alt={photo.title} /></figure>
-              <div className="card-body text-center flex items-center">
-                <p className="card-title text-sm">{photo.title}</p>
+        {/* Carousel for small screens */}
+        <div className="flex sm:hidden ">
+          {octopusData.photos && octopusData.photos.length > 0 && (
+            <div className="carousel-item relative w-full card card-compact bg-base-300 shadow-xl text-center">
+              <figure className=""><img src={octopusData.photos[currentImageIndex].document} alt={octopusData.photos[currentImageIndex].title} /></figure>
+              <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
+                <button onClick={goToPreviousImage} className="btn btn-circle btn-xs">❮</button>
+                <button onClick={goToNextImage} className="btn btn-circle btn-xs">❯</button>
               </div>
+              <p className="card-title text-sm">{octopusData.photos[currentImageIndex].title}</p>
             </div>
-          ))
-        )}
+          )}
+        </div>
+
+        {/* GRID FOR LARGER SCREEN */}
+        <div className="hidden sm:block">
+          {octopusData.photos && (
+            octopusData.photos.map((photo, idx) => (
+              <div key={idx} className="card card-compact bg-base-300 shadow-xl w-5/6">
+                <figure className=""><img src={photo.document} alt={photo.title} /></figure>
+                <div className="card-body text-center flex items-center">
+                  <p className="card-title text-sm">{photo.title}</p>
+                </div>
+              </div>
+            ))
+          )}
+        </div>
       </div>
-      <div>
-        <form onSubmit={handleSubmit} className="flex flex-col space-y-4 w-full max-w-xs">
+      <di className="card card-body space-y-4">
+        <form onSubmit={handleSubmit} className="flex flex-col space-y-4 w-full mt-7">
           <input
             type="text"
-            placeholder="Image Title"
+            placeholder="Image Title or Location"
             id="title"
             value={imageTitle}
             onChange={handleChange}
             required
-            className="py-2"
+            className="p-2"
           />
           <input
             type="file"
@@ -78,7 +104,7 @@ const AddPhoto = ({ octopusData, setPhotoAdded }) => {
           />
           <button type="submit" className="btn btn-secondary">Add Photo</button>
         </form>
-      </div>
+      </di>
     </>
   )
 }
