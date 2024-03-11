@@ -47,8 +47,8 @@ export default function AddSighting({ octopusData, setSightingAdded }) {
   }
 
   return (
-    <div className="card card-body space-y-4" >
-      <h1 className="text-lg font-bold">Recent Sightings</h1>
+    <div className="card card-body space-y-4 flex justify-center items-center md:w-full" >
+      <h1 className="text-white text-lg font-bold">Recent Sightings</h1>
       <div>
         {octopusData.sightings_this_week ? (
           <div className="card card-normal bg-primary-content p-4">The {octopusData.name} has been spotted this week!</div>
@@ -59,12 +59,12 @@ export default function AddSighting({ octopusData, setSightingAdded }) {
         )
         }
       </div>
-      <div className="overflow-x-auto">
-        <table className="table table-zebra">
+      <div className="flex justify-center w-5/6">
+        <table className="table table-zebra w-5/6">
           <thead className="text-sm">
             <tr>
-              <th>Date</th>
-              <th>Location</th>
+              <th className="text-white">Date</th>
+              <th className="text-white">Location</th>
             </tr>
           </thead>
           <tbody>
@@ -77,22 +77,22 @@ export default function AddSighting({ octopusData, setSightingAdded }) {
           </tbody>
         </table>
       </div>
-      <h2 className="text-lg font-bold">Add Sighting</h2>
-      <form onSubmit={handleSubmit} className="flex items-center content-center w-full form-control space-y-4">
+      <h2 className="text-white text-lg font-bold mt-5">Add Sighting</h2>
+      <form onSubmit={handleSubmit} className="flex items-center content-center w-5/6 form-control space-y-4">
         <input
           name="date"
           type="date"
           value={formData.date}
           onChange={handleChange}
-          className="input input-bordered w-full"
+          className="input input-bordered w-5/6"
         />
         <select
           name="location"
           id="location"
           onChange={handleChange}
-          className="select select-bordered w-full"
+          className="select select-bordered w-5/6"
         >
-          <option value=""></option>
+          <option value="">Choose Location</option>
           {SEAS_OPTIONS.map(sea => (
             <option key={sea.value} value={sea.value}>
               {sea.label}
@@ -100,7 +100,7 @@ export default function AddSighting({ octopusData, setSightingAdded }) {
           ))}
         </select>
         <button
-          className="btn btn-secondary w-full"
+          className="btn btn-secondary w-5/6"
           type="submit"
         >
           Add Sighting

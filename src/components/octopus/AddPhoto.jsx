@@ -59,32 +59,37 @@ const AddPhoto = ({ octopusData, setPhotoAdded }) => {
         <div className="flex sm:hidden ">
           {octopusData.photos && octopusData.photos.length > 0 && (
             <div className="carousel-item relative w-full card card-compact bg-base-300 shadow-xl text-center">
-              <figure className=""><img src={octopusData.photos[currentImageIndex].document} alt={octopusData.photos[currentImageIndex].title} /></figure>
+              <figure>
+                <img src={octopusData.photos[currentImageIndex].document} alt={octopusData.photos[currentImageIndex].title} />
+              </figure>
               <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
                 <button onClick={goToPreviousImage} className="btn btn-circle btn-xs">❮</button>
                 <button onClick={goToNextImage} className="btn btn-circle btn-xs">❯</button>
               </div>
-              <p className="card-title text-sm">{octopusData.photos[currentImageIndex].title}</p>
+              <div className="card-body flex justify-center items-center">
+                <p className="card-title">{octopusData.photos[currentImageIndex].title}</p>
+              </div>
             </div>
           )}
         </div>
-
-        {/* GRID FOR LARGER SCREEN */}
-        <div className="hidden sm:block">
-          {octopusData.photos && (
-            octopusData.photos.map((photo, idx) => (
-              <div key={idx} className="card card-compact bg-base-300 shadow-xl w-5/6">
+      </div>
+      {/* GRID FOR LARGER SCREEN */}
+      <div className="hidden sm:grid">
+        {octopusData.photos && (
+          <div className="mt-5 sm:grid sm:grid-cols-2 sm:gap-3">
+            {octopusData.photos.map((photo, idx) => (
+              <div key={idx} className="card card-compact bg-base-300 shadow-xl w-full">
                 <figure className=""><img src={photo.document} alt={photo.title} /></figure>
                 <div className="card-body text-center flex items-center">
-                  <p className="card-title text-sm">{photo.title}</p>
+                  <p className="card-title justify-center text-sm">{photo.title}</p>
                 </div>
               </div>
-            ))
-          )}
-        </div>
+            ))}
+          </div>
+        )}
       </div>
-      <di className="card card-body space-y-4">
-        <form onSubmit={handleSubmit} className="flex flex-col space-y-4 w-full mt-7">
+      <div className="card card-body space-y-4">
+        <form onSubmit={handleSubmit} className="flex flex-col justify-center items-center space-y-4 w-full mt-5">
           <input
             type="text"
             placeholder="Image Title or Location"
@@ -92,19 +97,21 @@ const AddPhoto = ({ octopusData, setPhotoAdded }) => {
             value={imageTitle}
             onChange={handleChange}
             required
-            className="p-2"
+            className="p-2 w-5/6"
           />
-          <input
-            type="file"
-            id="image"
-            accept="image/png, image/jpeg"
-            onChange={handleImageChange}
-            required
-            className="w-full file:ml-6 file:mr-8 file:py-2 file:rounded-full file:border-solid file:px-5 file:font-semibold file:bg-orange-200 file:text-black hover:file:bg-orange-300"
-          />
-          <button type="submit" className="btn btn-secondary">Add Photo</button>
+          <div>
+            <input
+              type="file"
+              id="image"
+              accept="image/png, image/jpeg"
+              onChange={handleImageChange}
+              required
+              className="w-full file:ml-6 file:mr-8 file:py-2 file:rounded-full file:border-solid file:px-5 file:font-semibold file:bg-orange-200 file:text-black hover:file:bg-orange-300"
+            />
+          </div>
+          <button type="submit" className="btn btn-secondary w-5/6">Add Photo</button>
         </form>
-      </di>
+      </div>
     </>
   )
 }

@@ -48,11 +48,11 @@ export default function OctopusDetail() {
             <div className="text-center flex flex-col md:flex-row gap-4 justify-center md:items-start">
               <div className="card p-4 md:w-1/2">
                 <div className="card-body flex items-center">
-                  <h1 className="card-title text-center">
+                  <h1 className="text-white card-title text-center">
                     {data.name} <span className="text-sm">({data.scientific_name})</span>
                   </h1>
-                  <p><strong>Bio:</strong> {data.description}</p>
-                  <p><strong>Maximum life span:</strong> {data.life_span} years.</p>
+                  <p><strong className="text-white">Bio:</strong> {data.description}</p>
+                  <p><strong className="text-white">Maximum life span:</strong> {data.life_span} years.</p>
                 </div>
                 <hr />
                 <AddPhoto octopusData={data} setPhotoAdded={setPhotoAdded} />
