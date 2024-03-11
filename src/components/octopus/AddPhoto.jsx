@@ -106,7 +106,7 @@ const AddPhoto = ({ octopusData, setPhotoAdded }) => {
               accept="image/png, image/jpeg"
               onChange={handleImageChange}
               required
-              className="w-full file:ml-6 file:mr-8 file:py-2 file:rounded-full file:border-solid file:px-5 file:font-semibold file:bg-orange-200 file:text-black hover:file:bg-orange-300"
+              className="file:btn w-full file:ml-6 file:mr-8 file:py-2 file:rounded-full file:border-solid file:px-5 file:font-semibold file:bg-orange-200 file:text-black hover:file:bg-orange-300"
             />
           </div>
           <button type="submit" className="btn btn-secondary w-5/6">Add Photo</button>
