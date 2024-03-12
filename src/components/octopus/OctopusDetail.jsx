@@ -20,7 +20,6 @@ export default function OctopusDetail() {
     async function fetchData() {
       try {
         const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/octopus/${id}`)
-        console.log(response.data)
         setData(response.data)
         setPhotoAdded(false)
         setSightingAdded(false)

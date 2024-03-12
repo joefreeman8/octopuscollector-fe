@@ -10,7 +10,6 @@ export default function OctopusIndex() {
   async function fetchData() {
     try {
       const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/octopus`)
-      console.log(response.data)
       setData(response.data)
     } catch (e) {
       console.log(e)
