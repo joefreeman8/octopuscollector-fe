@@ -4,6 +4,7 @@ import { useParams, Link } from "react-router-dom"
 import AddPhoto from "./AddPhoto"
 import AddSighting from "./AddSighting"
 import Loading from "../common/Loading"
+import OctopusEdit from "./OctopusEdit"
 
 
 export default function OctopusDetail() {
@@ -11,6 +12,7 @@ export default function OctopusDetail() {
   const [data, setData] = useState(null)
   const [photoAdded, setPhotoAdded] = useState(false)
   const [sightingAdded, setSightingAdded] = useState(false)
+  const [isEditMode, setIsEditMode] = useState(true)
   const { id } = useParams()
 
   const isLoading = !data
@@ -47,11 +49,17 @@ export default function OctopusDetail() {
             <div className="text-center flex flex-col md:flex-row gap-4 justify-center md:items-start">
               <div className="card p-4 md:w-1/2">
                 <div className="card-body flex items-center">
-                  <h1 className="text-white card-title text-center">
-                    {data.name} <span className="text-sm">({data.scientific_name})</span>
-                  </h1>
-                  <p><strong className="text-white">Bio:</strong> {data.description}</p>
-                  <p><strong className="text-white">Maximum life span:</strong> {data.life_span} years.</p>
+                  {isEditMode ? (
+                    <OctopusEdit />
+                  ) : (
+                    <>
+                      <h1 className="text-white card-title text-center">
+                        {data.name} <span className="text-sm">({data.scientific_name})</span>
+                      </h1>
+                      <p><strong className="text-white">Bio:</strong> {data.description}</p>
+                      <p><strong className="text-white">Maximum life span:</strong> {data.life_span} years.</p>
+                    </>
+                  )}
                 </div>
                 <hr />
                 <AddPhoto octopusData={data} setPhotoAdded={setPhotoAdded} />
