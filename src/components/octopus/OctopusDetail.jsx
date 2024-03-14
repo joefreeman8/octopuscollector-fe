@@ -12,7 +12,7 @@ export default function OctopusDetail() {
   const [data, setData] = useState(null)
   const [photoAdded, setPhotoAdded] = useState(false)
   const [sightingAdded, setSightingAdded] = useState(false)
-  const [isEditMode, setIsEditMode] = useState(true)
+  const [isEditMode, setIsEditMode] = useState(false)
   const { id } = useParams()
 
   const isLoading = !data
@@ -33,6 +33,9 @@ export default function OctopusDetail() {
     fetchData()
   }, [id, photoAdded, sightingAdded])
 
+  function editButton() {
+    setIsEditMode(true)
+  }
 
 
   return (
@@ -42,7 +45,11 @@ export default function OctopusDetail() {
         <>
           <div className="mb-5">
             <Link className="mt-5 ml-5 mr-2 btn btn-accent btn-target:shadow-lg" to={'/octopus'}>Go Back</Link>
-            <button className="btn btn-warning mr-2">Edit</button>
+            {isEditMode ? (
+              <button className="btn btn-warning mr-2 btn-disabled">Edit</button>
+            ) : (
+              <button onClick={editButton} className="btn btn-warning mr-2">Edit</button>
+            )}
             <button className="btn btn-error">Delete</button>
           </div>
           <div className="flex justify-center items-center">
@@ -50,7 +57,12 @@ export default function OctopusDetail() {
               <div className="card p-4 md:w-1/2">
                 <div className="card-body flex items-center">
                   {isEditMode ? (
-                    <OctopusEdit />
+                    <OctopusEdit
+                      name={data.name}
+                      scientific_name={data.scientific_name}
+                      bio={data.description}
+                      life_span={data.life_span}
+                      setIsEditMode={setIsEditMode} />
                   ) : (
                     <>
                       <h1 className="text-white card-title text-center">
