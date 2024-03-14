@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import axios from 'axios'
 import { useParams, Link, useNavigate } from "react-router-dom"
-import AddPhoto from "./AddPhoto"
+import DisplayPhoto from "../photos/DisplayPhoto"
 import AddSighting from "./AddSighting"
 import Loading from "../common/Loading"
 import OctopusEdit from "./OctopusEdit"
@@ -111,7 +111,7 @@ export default function OctopusDetail() {
                   )}
                 </div>
                 <hr />
-                <AddPhoto octopusData={data} setIsComplete={setIsComplete} />
+                <DisplayPhoto octopusData={data} setIsComplete={setIsComplete} />
                 <hr className="sm:hidden" />
               </div>
               <div className="card px-4 md:w-1/2">
