@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import axios from 'axios'
-import { useParams, Link } from "react-router-dom"
+import { useParams, Link, useNavigate } from "react-router-dom"
 import AddPhoto from "./AddPhoto"
 import AddSighting from "./AddSighting"
 import Loading from "../common/Loading"
@@ -12,9 +12,12 @@ export default function OctopusDetail() {
   const [data, setData] = useState(null)
   const [isEditMode, setIsEditMode] = useState(false)
   const [isComplete, setIsComplete] = useState(false)
+  const [isModalOpen, setIsModalOpen] = useState(false)
   const { id } = useParams()
+  const navigate = useNavigate()
 
   const isLoading = !data
+
 
 
   useEffect(() => {
@@ -35,6 +38,28 @@ export default function OctopusDetail() {
     setIsEditMode(true)
   }
 
+  function openDeleteModal() {
+    setIsModalOpen(true)
+  }
+
+  function closeDeleteModal() {
+    setIsModalOpen(false)
+  }
+
+  async function handleDelete() {
+    try {
+      await axios.delete(`${process.env.REACT_APP_BACKEND_URL}/octopus/${id}`, {}, {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+      console.log('deleted')
+      navigate('/octopus')
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
 
   return (
     <div>
@@ -48,7 +73,18 @@ export default function OctopusDetail() {
             ) : (
               <button onClick={editButton} className="btn btn-warning mr-2">Edit</button>
             )}
-            <button className="btn btn-error">Delete</button>
+            <button onClick={openDeleteModal} className="btn btn-error">Delete</button>
+            {isModalOpen && (
+              <div className="modal modal-open modal-bottom sm:modal-middle">
+                <div className="modal-box">
+                  <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" onClick={closeDeleteModal}>✕</button>
+                  <h3 className="font-bold text-lg">Are you sure you want to delete this {data.name}?</h3>
+                  <div className="modal-action">
+                    <button className="btn btn-error" onClick={handleDelete}>Delete</button>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
           <div className="flex justify-center items-center">
             <div className="text-center flex flex-col md:flex-row gap-4 justify-center md:items-start">
@@ -76,8 +112,9 @@ export default function OctopusDetail() {
                 </div>
                 <hr />
                 <AddPhoto octopusData={data} setIsComplete={setIsComplete} />
+                <hr className="sm:hidden" />
               </div>
-              <div className="card p-4 md:w-1/2">
+              <div className="card px-4 md:w-1/2">
                 <AddSighting octopusData={data} setIsComplete={setIsComplete} />
               </div>
               <div className="card-footer card-actions justify-end">
