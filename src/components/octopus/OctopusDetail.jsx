@@ -10,10 +10,8 @@ import OctopusEdit from "./OctopusEdit"
 export default function OctopusDetail() {
 
   const [data, setData] = useState(null)
-  const [photoAdded, setPhotoAdded] = useState(false)
-  const [sightingAdded, setSightingAdded] = useState(false)
   const [isEditMode, setIsEditMode] = useState(false)
-  const [isUpdated, setIsUpdated] = useState(false)
+  const [isComplete, setIsComplete] = useState(false)
   const { id } = useParams()
 
   const isLoading = !data
@@ -24,16 +22,14 @@ export default function OctopusDetail() {
       try {
         const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/octopus/${id}`)
         setData(response.data)
-        setPhotoAdded(false)
-        setSightingAdded(false)
-        setIsUpdated(false)
+        setIsComplete(false)
       } catch (e) {
         console.log(e)
       }
     }
 
     fetchData()
-  }, [id, photoAdded, sightingAdded, isUpdated])
+  }, [id, isComplete])
 
   function editButton() {
     setIsEditMode(true)
@@ -65,7 +61,7 @@ export default function OctopusDetail() {
                       description={data.description}
                       life_span={data.life_span}
                       setIsEditMode={setIsEditMode}
-                      setIsUpdated={setIsUpdated}
+                      setIsComplete={setIsComplete}
                       id={id}
                     />
                   ) : (
@@ -79,10 +75,10 @@ export default function OctopusDetail() {
                   )}
                 </div>
                 <hr />
-                <AddPhoto octopusData={data} setPhotoAdded={setPhotoAdded} />
+                <AddPhoto octopusData={data} setIsComplete={setIsComplete} />
               </div>
               <div className="card p-4 md:w-1/2">
-                <AddSighting octopusData={data} setSightingAdded={setSightingAdded} />
+                <AddSighting octopusData={data} setIsComplete={setIsComplete} />
               </div>
               <div className="card-footer card-actions justify-end">
               </div>

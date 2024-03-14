@@ -2,7 +2,7 @@ import { useState } from "react"
 import { useParams } from 'react-router-dom'
 import axios from "axios"
 
-export default function AddSighting({ octopusData, setSightingAdded }) {
+export default function AddSighting({ octopusData, setIsComplete }) {
 
   const { id } = useParams()
 
@@ -39,7 +39,7 @@ export default function AddSighting({ octopusData, setSightingAdded }) {
     e.preventDefault()
     try {
       await axios.post(`${process.env.REACT_APP_BACKEND_URL}/octopus/${id}/sightings/`, formData)
-      setSightingAdded(true)
+      setIsComplete(true)
     } catch (err) {
       console.log(err)
     }

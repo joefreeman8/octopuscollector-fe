@@ -3,7 +3,7 @@ import axios from "axios";
 import { v4 as uuidv4 } from 'uuid';
 import { useParams } from "react-router-dom";
 
-const AddPhoto = ({ octopusData, setPhotoAdded }) => {
+const AddPhoto = ({ octopusData, setIsComplete }) => {
   const [imageTitle, setImageTitle] = useState('')
   const [image, setImage] = useState(null)
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
@@ -38,7 +38,7 @@ const AddPhoto = ({ octopusData, setPhotoAdded }) => {
         }
       })
       setImageTitle('')
-      setPhotoAdded(true)
+      setIsComplete(true)
     } catch (err) {
       console.log(err)
     }

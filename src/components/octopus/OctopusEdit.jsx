@@ -1,7 +1,7 @@
 import { useState } from "react"
 import axios from 'axios'
 
-export default function OctopusEdit({ name, scientific_name, description, life_span, setIsEditMode, setIsUpdated, id }) {
+export default function OctopusEdit({ name, scientific_name, description, life_span, setIsEditMode, setIsComplete, id }) {
 
   const [formData, setFormData] = useState({
     name: name,
@@ -12,14 +12,8 @@ export default function OctopusEdit({ name, scientific_name, description, life_s
 
   const [isModalOpen, setIsModalOpen] = useState(false)
 
-  // function handleChange(e) {
-  //   setFormData({ ...formData, [e.target.name]: e.target.value })
-  //   console.log(e.target.value)
-  // }
   function handleChange(e) {
-    const { name, value } = e.target
-    const updatedValue = name === "life_span" ? parseInt(value, 10) : value; // Convert life_span to a number
-    setFormData(prevFormData => ({ ...prevFormData, [name]: updatedValue }));
+    setFormData({ ...formData, [e.target.name]: e.target.value })
   }
 
   async function handleSubmit(e) {
@@ -30,7 +24,7 @@ export default function OctopusEdit({ name, scientific_name, description, life_s
           'Content-Type': 'application/json'
         }
       })
-      setIsUpdated(true)
+      setIsComplete(true)
       setIsEditMode(false)
     } catch (err) {
       console.log(err)
