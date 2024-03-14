@@ -13,6 +13,7 @@ export default function OctopusDetail() {
   const [photoAdded, setPhotoAdded] = useState(false)
   const [sightingAdded, setSightingAdded] = useState(false)
   const [isEditMode, setIsEditMode] = useState(false)
+  const [isUpdated, setIsUpdated] = useState(false)
   const { id } = useParams()
 
   const isLoading = !data
@@ -25,13 +26,14 @@ export default function OctopusDetail() {
         setData(response.data)
         setPhotoAdded(false)
         setSightingAdded(false)
+        setIsUpdated(false)
       } catch (e) {
         console.log(e)
       }
     }
 
     fetchData()
-  }, [id, photoAdded, sightingAdded])
+  }, [id, photoAdded, sightingAdded, isUpdated])
 
   function editButton() {
     setIsEditMode(true)
@@ -60,9 +62,12 @@ export default function OctopusDetail() {
                     <OctopusEdit
                       name={data.name}
                       scientific_name={data.scientific_name}
-                      bio={data.description}
+                      description={data.description}
                       life_span={data.life_span}
-                      setIsEditMode={setIsEditMode} />
+                      setIsEditMode={setIsEditMode}
+                      setIsUpdated={setIsUpdated}
+                      id={id}
+                    />
                   ) : (
                     <>
                       <h1 className="text-white card-title text-center">
