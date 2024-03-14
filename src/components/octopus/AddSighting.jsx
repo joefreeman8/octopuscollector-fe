@@ -35,6 +35,7 @@ export default function AddSighting({ octopusData, setIsComplete }) {
     setFormData({ ...formData, [e.target.name]: value })
   }
 
+
   async function handleSubmit(e) {
     e.preventDefault()
     try {
@@ -43,7 +44,11 @@ export default function AddSighting({ octopusData, setIsComplete }) {
     } catch (err) {
       console.log(err)
     }
+  }
 
+  function formatDate(dateStr) {
+    const [year, month, day] = dateStr.split('-')
+    return `${day}-${month}-${year}`
   }
 
   return (
@@ -70,7 +75,7 @@ export default function AddSighting({ octopusData, setIsComplete }) {
           <tbody>
             {octopusData.sightings.map((sighting, idx) => (
               <tr key={idx}>
-                <td>{sighting.date}</td>
+                <td>{formatDate(sighting.date)}</td>
                 <td>{sighting.location_display}</td>
               </tr>
             ))}
