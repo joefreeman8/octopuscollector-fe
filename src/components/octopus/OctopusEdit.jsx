@@ -3,7 +3,7 @@ export default function OctopusEdit() {
 
 
   return (
-    <>
+    <div className="bordered">
       <div>OctopusEdit</div>
       <form className="form-control">
         <div className="flex gap-2">
@@ -24,6 +24,6 @@ export default function OctopusEdit() {
           <option value="5">Five Years</option>
         </select>
       </form>
-    </>
+    </div>
   )
 }
