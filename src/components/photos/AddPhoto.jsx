@@ -23,7 +23,6 @@ export default function AddPhoto({ setIsComplete }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    console.log(image)
     const body = {
       title: imageTitle,
       document: image,

@@ -1,7 +1,6 @@
-import React, { useState } from "react"
-import AddPhoto from "./AddPhoto"
+import { useState } from "react"
 
-const DisplayPhoto = ({ octopusData, setIsComplete }) => {
+export default function DisplayPhoto({ octopusData }) {
 
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
 
@@ -49,10 +48,6 @@ const DisplayPhoto = ({ octopusData, setIsComplete }) => {
           </div>
         )}
       </div>
-      <AddPhoto setIsComplete={setIsComplete} />
-
     </>
   )
 }
-
-export default DisplayPhoto
