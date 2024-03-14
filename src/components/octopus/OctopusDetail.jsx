@@ -26,6 +26,7 @@ export default function OctopusDetail() {
       try {
         const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/octopus/${id}`)
         setData(response.data)
+        console.log(response.data)
         setIsComplete(false)
       } catch (e) {
         console.log(e)
@@ -89,27 +90,29 @@ export default function OctopusDetail() {
           </div>
           <div className="flex justify-center items-center">
             <div className="text-center flex flex-col md:flex-row gap-4 justify-center md:items-start">
-              <div className="card p-4 md:w-1/2">
-                <div className="card-body flex items-center">
-                  {isEditMode ? (
-                    <OctopusEdit
-                      name={data.name}
-                      scientific_name={data.scientific_name}
-                      description={data.description}
-                      life_span={data.life_span}
-                      setIsEditMode={setIsEditMode}
-                      setIsComplete={setIsComplete}
-                      id={id}
-                    />
-                  ) : (
-                    <>
-                      <h1 className="text-white card-title text-center">
-                        {data.name} <span className="text-sm">({data.scientific_name})</span>
-                      </h1>
-                      <p><strong className="text-white">Bio:</strong> {data.description}</p>
-                      <p><strong className="text-white">Maximum life span:</strong> {data.life_span} years.</p>
-                    </>
-                  )}
+              <div className="p-4 md:w-1/2">
+                <div className="card bg-base-100 mb-5 shadow-xl">
+                  <div className="card-body flex items-center">
+                    {isEditMode ? (
+                      <OctopusEdit
+                        name={data.name}
+                        scientific_name={data.scientific_name}
+                        description={data.description}
+                        life_span={data.life_span}
+                        setIsEditMode={setIsEditMode}
+                        setIsComplete={setIsComplete}
+                        id={id}
+                      />
+                    ) : (
+                      <>
+                        <h1 className="text-white card-title text-center">
+                          {data.name} <span className="text-sm">({data.scientific_name})</span>
+                        </h1>
+                        <p><strong className="text-white">Bio:</strong> {data.description}</p>
+                        <p><strong className="text-white">Maximum life span:</strong> {data.life_span} years.</p>
+                      </>
+                    )}
+                  </div>
                 </div>
                 <hr />
                 <DisplayPhoto octopusData={data} />

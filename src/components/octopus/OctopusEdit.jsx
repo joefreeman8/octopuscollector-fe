@@ -49,7 +49,7 @@ export default function OctopusEdit({ name, scientific_name, description, life_s
     <div className="bordered">
       <h1 className="text-white text-lg font-bold">Edit Octopus Details</h1>
       <form className="form-control mt-5" onSubmit={handleSubmit}>
-        <div className="flex gap-2">
+        <div className="md:flex gap-2">
           <label className="input input-bordered flex items-center gap-2 text-sm text-base-content" htmlFor="name">
             <span className="font-bold">Name:</span>
             <input type="text" id="name" className="grow" name="name" value={formData.name} onChange={handleChange} />

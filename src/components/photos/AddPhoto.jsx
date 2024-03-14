@@ -45,10 +45,10 @@ export default function AddPhoto({ setIsComplete }) {
 
 
   return (
-    <div className="card card-body space-y-4">
+    <div className="card bg-base-100 card-body mt-5 shadow-lg">
       <h2 className="md:mt-4 text-white text-lg font-bold">Add Photo</h2>
       <form onSubmit={handleSubmit} className="flex flex-col justify-center items-center space-y-4 w-full mt-5">
-        <label className="input input-bordered flex items-center gap-2 w-5/6 text-sm" htmlFor="scientific_name">
+        <label className="input input-bordered flex items-center w-5/6 text-sm bg-base-100" htmlFor="title">
           <span className="font-bold">Image Title:</span>
           <input
             type="text"
@@ -56,7 +56,7 @@ export default function AddPhoto({ setIsComplete }) {
             value={imageTitle}
             onChange={handleChange}
             required
-            className="p-2"
+            className="p-2 bg-base-100 "
           />
         </label>
         <input
@@ -65,7 +65,7 @@ export default function AddPhoto({ setIsComplete }) {
           accept="image/png, image/jpeg"
           onChange={handleImageChange}
           required
-          className="file-input file-input-bordered file-input-secondary w-full max-w-xs"
+          className="file-input file-input-bordered w-5/6"
         />
         <button type="submit" className="btn btn-secondary w-5/6">Add Photo</button>
       </form>

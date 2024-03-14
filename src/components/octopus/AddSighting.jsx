@@ -60,7 +60,7 @@ export default function AddSighting({ octopusData, setIsComplete }) {
         ) : octopusData.sightings_this_month ? (
           <div className="card card-normal bg-warning text-black p-4">The {octopusData.name} has been sighted within the last 28 days!</div>
         ) : (
-          <div className="card card-normal bg-red-600 p-4">The {octopusData.name} has not been spotted for a while!</div>
+          <div className="card card-normal bg-error p-4">The {octopusData.name} has not been spotted for a while!</div>
         )
         }
       </div>
