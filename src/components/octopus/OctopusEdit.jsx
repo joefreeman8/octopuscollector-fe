@@ -59,7 +59,7 @@ export default function OctopusEdit({ name, scientific_name, description, life_s
             <input type="text" id="scientific_name" className="grow" name="scientific_name" value={formData.scientific_name} onChange={handleChange} />
           </label>
         </div>
-        <textarea className="mt-2 textarea textarea-info placeholder-base-content" placeholder="Bio" name="description" value={formData.description} onChange={handleChange}></textarea>
+        <textarea className="mt-2 textarea textarea-bordered placeholder-base-content" placeholder="Bio" name="description" value={formData.description} onChange={handleChange}></textarea>
         <select className="mt-2 select select-bordered w-full" name="life_span" value={formData.life_span} onChange={handleChange}>
           <option disabled className="font-bold">Maximum Lifespan</option>
           <option value="1">One Year</option>

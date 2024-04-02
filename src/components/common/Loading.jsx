@@ -1,6 +1,9 @@
+import '../../styles/Loading.css'
 
 export default function Loading() {
   return (
-    <p className="">...loading 🐙</p>
+    <div className="h-screen w-screen flex justify-center items-center">
+      <span className="loader"></span>
+    </div>
   )
 }

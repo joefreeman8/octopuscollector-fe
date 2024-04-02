@@ -36,7 +36,7 @@ export default function Signup() {
     <div className="Auth-form-container flex justify-center items-center min-h-screen">
       <form className="Auth-form w-full max-w-lg" onSubmit={submit}>
         <div className="Auth-form-content card card-compact bg-base-100 shadow-xl p-4">
-          <h3 className="Auth-form-title text-2xl font-bold">Sign In</h3>
+          <h3 className="Auth-form-title text-2xl font-bold">Sign Up</h3>
           <div className="form-control mt-4">
             <label className="label">
               <span className="label-text">Username</span>

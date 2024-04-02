@@ -39,7 +39,9 @@ export default function DisplayPhoto({ octopusData }) {
           <div className="mt-5 sm:grid sm:grid-cols-2 sm:gap-3">
             {octopusData.photos.map((photo, idx) => (
               <div key={idx} className="card card-compact bg-base-300 shadow-xl w-full">
-                <figure className=""><img src={photo.document} alt={photo.title} /></figure>
+                <figure className="">
+                  <img className="h-56 2xl:h-80 w-full" src={photo.document} alt={photo.title} />
+                </figure>
                 <div className="card-body text-center flex items-center">
                   <p className="card-title justify-center text-sm">{photo.title}</p>
                 </div>
