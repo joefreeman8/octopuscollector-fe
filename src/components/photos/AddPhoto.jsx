@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from 'uuid'
 import { useParams } from "react-router-dom"
 
 
-export default function AddPhoto({ setIsComplete }) {
+export default function AddPhoto({ setIsComplete, user }) {
   const [imageTitle, setImageTitle] = useState('')
   const [image, setImage] = useState(null)
   const { id } = useParams()
@@ -26,7 +26,8 @@ export default function AddPhoto({ setIsComplete }) {
     const body = {
       title: imageTitle,
       document: image,
-      octopus: id
+      octopus: id,
+      owner: user.user_id
     }
 
     try {

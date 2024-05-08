@@ -8,7 +8,7 @@ import Loading from "../common/Loading"
 import OctopusEdit from "./OctopusEdit"
 
 
-export default function OctopusDetail() {
+export default function OctopusDetail({ user }) {
 
   const [data, setData] = useState(null)
   const [isEditMode, setIsEditMode] = useState(false)
@@ -116,8 +116,12 @@ export default function OctopusDetail() {
                 </div>
                 <hr />
                 <DisplayPhoto octopusData={data} />
-                <AddPhoto setIsComplete={setIsComplete} />
-                <hr className="sm:hidden" />
+                {user &&
+                  <>
+                    <AddPhoto setIsComplete={setIsComplete} user={user} />
+                    <hr className="sm:hidden" />
+                  </>
+                }
               </div>
               <div className="card px-4 md:w-1/2">
                 <AddSighting octopusData={data} setIsComplete={setIsComplete} />

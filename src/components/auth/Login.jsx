@@ -1,8 +1,9 @@
 import { useState } from "react"
 import axios from "axios"
+import { Link } from "react-router-dom";
 // import { useNavigate } from 'react-router-dom'
 
-export default function Login() {
+export default function Login({ setUser }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -28,7 +29,9 @@ export default function Login() {
     localStorage.clear();
     localStorage.setItem("access_token", data.access);
     localStorage.setItem("refresh_token", data.refresh);
-    axios.defaults.headers.common["Authorization"] = `Bearer ${data["access"]}`;
+    axios.defaults.headers.common["Authorization"] = `Bearer ${data["access"]}`
+
+    setUser(user)
     // window.location.href = "/"; 
   }
 
@@ -69,6 +72,11 @@ export default function Login() {
             <button type="submit" className="btn btn-accent">
               Submit
             </button>
+            <p className="mt-2 text-center">Don't Have an Account?&nbsp;
+              <Link to='/signup'>
+                <span className="underline">Sign Up Here</span>
+              </Link>
+            </p>
           </div>
         </div>
       </form>

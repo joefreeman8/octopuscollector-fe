@@ -2,6 +2,8 @@ import { useState } from "react"
 
 export default function DisplayPhoto({ octopusData }) {
 
+
+
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
 
   const goToPreviousImage = () => {

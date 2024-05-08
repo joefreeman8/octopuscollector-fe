@@ -1,6 +1,6 @@
 import { useState } from "react"
 import axios from "axios"
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 
 export default function Signup() {
 
@@ -103,6 +103,11 @@ export default function Signup() {
                 Submit
               </button>
             )}
+            <p className="mt-2 text-center">Already Have an Account?&nbsp;
+              <Link to='/login'>
+                <span className="underline">Sign In Here</span>
+              </Link>
+            </p>
           </div>
         </div>
       </form>
